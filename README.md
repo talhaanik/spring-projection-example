@@ -6,3 +6,5 @@ result [{"id":1,"name":"Talha","section":{"id":1,"name":"HRMS","hibernateLazyIni
 3. comment spring.jackson.serialization.FAIL_ON_EMPTY_BEANS=false and add 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) top of Section class
 result [{"id":1,"name":"Talha","section":{"id":1,"name":"HRMS"}}]
+
+https://remypenchenat.blogspot.com/2019/05/spring-jpa-using-specification-with.html
