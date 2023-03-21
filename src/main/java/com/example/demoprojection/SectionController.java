@@ -1,19 +1,23 @@
 package com.example.demoprojection;
 
-import com.example.demoprojection.projections.SectionPj;
 import com.example.demoprojection.projections.SectionView;
+import jakarta.persistence.Tuple;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@Slf4j
 public class SectionController {
     private final SectionRepo sectionRepo;
     private final OfficeRepo officeRepo;
-    private final EmployeeRepo empRepo;
+    private final EmployeeExtRepo empRepo;
 
     @GetMapping("/section/show")
     public List<SectionView> show(){
@@ -29,9 +33,15 @@ public class SectionController {
     }
 
     @GetMapping("/emp/show-all")
-    public List<Employee> empshow(){
+    public String empshow(){
 
-        return empRepo.findAllProjectdBy();
+        List<Tuple> allProjectdBy = empRepo.findAllWithPagination(EmployeeSpec.getEmployeesByName("Talha"),
+                Pageable.ofSize(5), Arrays.asList("name","id"));
+
+for(Tuple tupl:allProjectdBy){
+    log.info(tupl.get(0).toString());
+}
+        return "done";
     }
 
 }
